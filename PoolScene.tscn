@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhmeps37k3kt5"]
+[gd_scene load_steps=9 format=3 uid="uid://dhmeps37k3kt5"]
 
 [ext_resource type="Texture2D" uid="uid://x2m7kifeiqgf" path="res://icon.svg" id="1_imju5"]
 [ext_resource type="Script" uid="uid://4rwrgddnljvk" path="res://bumpers.gd" id="2_vh2b3"]
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://Ball.tscn" id="2_yiydf"]
+[ext_resource type="PackedScene" uid="uid://dk0x1sbdvcg2b" path="res://Cue.tscn" id="4_kstpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yiydf"]
 size = Vector2(934.5, 215)
@@ -46,3 +47,7 @@ shape = SubResource("RectangleShape2D_gv7l8")
 
 [node name="Ball" parent="." instance=ExtResource("2_yiydf")]
 linear_damp = 1.5
+
+[node name="Cue" parent="." instance=ExtResource("4_kstpv")]
+position = Vector2(435.5, 175)
+scale = Vector2(3.17969, 0.1)
