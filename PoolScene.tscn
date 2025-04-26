@@ -6,48 +6,47 @@
 [ext_resource type="PackedScene" uid="uid://dk0x1sbdvcg2b" path="res://Cue.tscn" id="4_kstpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yiydf"]
-size = Vector2(934.5, 215)
+size = Vector2(214.25, 32.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vh2b3"]
-size = Vector2(243.875, 495)
+size = Vector2(94.9375, 139.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kstpv"]
-size = Vector2(243.875, 495)
+size = Vector2(59.9375, 162.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv7l8"]
-size = Vector2(934.5, 215)
+size = Vector2(232.25, 49.5)
 
 [node name="Root" type="Node2D"]
 
 [node name="Table" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Table"]
-position = Vector2(578, 314)
-scale = Vector2(7.26563, 3.72656)
+position = Vector2(186, 93)
+scale = Vector2(1.72656, 0.996093)
 texture = ExtResource("1_imju5")
 
 [node name="Bumpers" type="StaticBody2D" parent="Table"]
 script = ExtResource("2_vh2b3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Bumpers"]
-position = Vector2(580.75, 23)
+position = Vector2(187.875, 23.25)
 shape = SubResource("RectangleShape2D_yiydf")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Table/Bumpers"]
-position = Vector2(36, 308.5)
+position = Vector2(53.4688, 88.25)
 shape = SubResource("RectangleShape2D_vh2b3")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Table/Bumpers"]
-position = Vector2(1106, 317)
+position = Vector2(307.031, 89.75)
 shape = SubResource("RectangleShape2D_kstpv")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Table/Bumpers"]
-position = Vector2(579, 614)
+position = Vector2(187.875, 158.25)
 shape = SubResource("RectangleShape2D_gv7l8")
 
 [node name="Ball" parent="." instance=ExtResource("2_yiydf")]
+position = Vector2(182, 92)
 linear_damp = 1.5
 
 [node name="Cue" parent="." instance=ExtResource("4_kstpv")]
-position = Vector2(435.5, 175)
-scale = Vector2(3.17969, 0.1)

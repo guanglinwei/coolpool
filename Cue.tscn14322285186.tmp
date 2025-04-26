@@ -15,6 +15,6 @@ animations = [{
 }]
 
 [node name="Cue" type="AnimatedSprite2D"]
-scale = Vector2(0.680176, 0.0261719)
+scale = Vector2(3.17969, 0.1)
 sprite_frames = SubResource("SpriteFrames_vh2b3")
 script = ExtResource("2_x4x3d")
