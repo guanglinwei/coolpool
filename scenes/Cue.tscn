@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dk0x1sbdvcg2b"]
 
-[ext_resource type="Texture2D" uid="uid://x2m7kifeiqgf" path="res://icon.svg" id="1_lhpgs"]
-[ext_resource type="Script" uid="uid://cf2h3kdmfoxvp" path="res://cue.gd" id="2_x4x3d"]
+[ext_resource type="Texture2D" uid="uid://x2m7kifeiqgf" path="res://sprites/icon.svg" id="1_lhpgs"]
+[ext_resource type="Script" uid="uid://cf2h3kdmfoxvp" path="res://scripts/cue.gd" id="2_x4x3d"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vh2b3"]
 animations = [{

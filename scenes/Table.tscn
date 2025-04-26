@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdv8k7w8m6gkq"]
+
+[ext_resource type="Texture2D" uid="uid://bxo3x8ebtbf4t" path="res://sprites/PoolTable.png" id="1_so1t7"]
+[ext_resource type="Script" uid="uid://4rwrgddnljvk" path="res://scripts/bumpers.gd" id="2_1euqw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh2b3"]
+size = Vector2(24, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_so1t7"]
+size = Vector2(68, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1euqw"]
+size = Vector2(24, 6)
+
+[node name="Table" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_so1t7")
+
+[node name="Bumpers" type="StaticBody2D" parent="."]
+script = ExtResource("2_1euqw")
+
+[node name="Wall2" type="CollisionShape2D" parent="Bumpers"]
+position = Vector2(-50, -36.5)
+shape = SubResource("RectangleShape2D_vh2b3")
+
+[node name="Wall3" type="CollisionShape2D" parent="Bumpers"]
+position = Vector2(50, -36.5)
+shape = SubResource("RectangleShape2D_vh2b3")
+
+[node name="Wall4" type="CollisionShape2D" parent="Bumpers"]
+position = Vector2(50, 36.5)
+shape = SubResource("RectangleShape2D_vh2b3")
+
+[node name="Wall5" type="CollisionShape2D" parent="Bumpers"]
+position = Vector2(-50, 36.5)
+shape = SubResource("RectangleShape2D_vh2b3")
+
+[node name="Wall6" type="CollisionShape2D" parent="Bumpers"]
+position = Vector2(0, 88)
+shape = SubResource("RectangleShape2D_so1t7")
+
+[node name="Wall7" type="CollisionShape2D" parent="Bumpers"]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_so1t7")
+
+[node name="Holes" type="Area2D" parent="."]
+collision_priority = 2.0
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Holes"]
+position = Vector2(-36, -71)
+scale = Vector2(0.46875, 0.46875)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Holes"]
+position = Vector2(36, -71)
+scale = Vector2(-0.469, 0.469)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Holes"]
+position = Vector2(-36, 71)
+scale = Vector2(0.469, -0.469)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+
+[node name="CollisionShape2D4" type="CollisionPolygon2D" parent="Holes"]
+position = Vector2(36, 71)
+scale = Vector2(-0.469, -0.469)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Holes"]
+position = Vector2(-50, 0)
+shape = SubResource("RectangleShape2D_1euqw")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Holes"]
+position = Vector2(50, 0)
+shape = SubResource("RectangleShape2D_1euqw")

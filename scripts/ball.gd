@@ -1,7 +1,7 @@
 class_name Ball;
 extends RigidBody2D;
 
-var velocity_epsilon: float = 0.06;
+var velocity_epsilon: float = 0.10;
 
 func _ready() -> void:
 	setup();
@@ -22,6 +22,7 @@ func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(linear_velocity * delta);
 	rotate(angular_velocity * delta);
 	if collision_info:
+		#if collision_info.get_collider()
 		linear_velocity = linear_velocity.bounce(collision_info.get_normal());
 		
 	if self.linear_velocity.length() < velocity_epsilon:
