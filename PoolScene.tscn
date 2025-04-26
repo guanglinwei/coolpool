@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhmeps37k3kt5"]
+
+[ext_resource type="Texture2D" uid="uid://x2m7kifeiqgf" path="res://icon.svg" id="1_imju5"]
+[ext_resource type="Script" uid="uid://4rwrgddnljvk" path="res://bumpers.gd" id="2_vh2b3"]
+[ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://Ball.tscn" id="2_yiydf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yiydf"]
+size = Vector2(934.5, 215)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh2b3"]
+size = Vector2(243.875, 495)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kstpv"]
+size = Vector2(243.875, 495)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gv7l8"]
+size = Vector2(934.5, 215)
+
+[node name="Root" type="Node2D"]
+
+[node name="Table" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Table"]
+position = Vector2(578, 314)
+scale = Vector2(7.26563, 3.72656)
+texture = ExtResource("1_imju5")
+
+[node name="Bumpers" type="StaticBody2D" parent="Table"]
+script = ExtResource("2_vh2b3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Bumpers"]
+position = Vector2(580.75, 23)
+shape = SubResource("RectangleShape2D_yiydf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Table/Bumpers"]
+position = Vector2(36, 308.5)
+shape = SubResource("RectangleShape2D_vh2b3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Table/Bumpers"]
+position = Vector2(1106, 317)
+shape = SubResource("RectangleShape2D_kstpv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Table/Bumpers"]
+position = Vector2(579, 614)
+shape = SubResource("RectangleShape2D_gv7l8")
+
+[node name="Ball" parent="." instance=ExtResource("2_yiydf")]
+linear_damp = 1.5
