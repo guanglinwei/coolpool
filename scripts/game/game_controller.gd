@@ -3,15 +3,26 @@ extends Node;
 @export var ball_scene: PackedScene;
 var balls: Array[Ball] = [];
 @onready var table: Node2D = $'../Table';
+@onready var game_ui: GameUIController = $'../GameUI';
 
-var current_score: int = 0;
-var curr_mult: float = 1.0:
+var current_score: int = 0:
 	set(value):
+		print(value);
+		current_score = value;
+		game_ui.update_scores(target_score, curr_base_score, curr_mult, value, 
+			round(acceptable_range[0] * target_score),
+			round(acceptable_range[1] * target_score),
+			value == 0);
+			
+@export var curr_mult: int = 1:
+	set(value):
+		curr_mult = value;
 		current_score = round(value * curr_base_score);
-var curr_base_score: int = 0:
+@export var curr_base_score: int = 0:
 	set(value):
+		curr_base_score = value;
 		current_score = round(curr_mult * value);
-var target_score: int = 0;
+@export var target_score: int = 0;
 var acceptable_range: Array[float] = [0.8, 1.2];
 var level: int = 1;
 
@@ -20,6 +31,7 @@ var max_cue_balls: int = 5;
 var curr_cue_balls: int = max_cue_balls;
 
 func _ready() -> void:
+	game_ui.reset();
 	init_level(level);
 	
 func init_level(level: int):
@@ -30,8 +42,12 @@ func init_level(level: int):
 		ball_rows += 1;
 	
 	curr_cue_balls = max_cue_balls;
+	target_score = round(12 + 5 * ((level - 1) ** 1.5));
+	curr_base_score = 0;
+	curr_mult = 1;
+	current_score = 0;
 	setup_balls(ball_rows);
-	
+
 func end_level():
 	# check if meet score range
 	if current_score < target_score * acceptable_range[0] or \
@@ -47,6 +63,7 @@ func create_ball() -> Ball:
 	var ball = ball_scene.instantiate() as Ball;
 	self.add_child(ball);
 	balls.append(ball);
+	ball.ball_entered_hole.connect(on_ball_entered_hole);
 	return ball;
 		
 func setup_balls(rows: int = 5):
@@ -65,3 +82,6 @@ func setup_balls(rows: int = 5):
 				Vector2.UP * (rows / 2 * gap + 35);
 			ball.position = pos;
 			count += 1
+
+func on_ball_entered_hole(index: int = -1):
+	curr_base_score += 1;

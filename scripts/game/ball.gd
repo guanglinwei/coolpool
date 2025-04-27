@@ -11,6 +11,8 @@ var last_velocities: Array[Vector2] = [];
 const max_remembered_velocities = 16;
 var curr_vel_ind = 0;
 
+signal ball_entered_hole(index: int);
+
 func _ready() -> void:
 	for i in range(max_remembered_velocities):
 		last_velocities.append(Vector2.INF);
@@ -32,6 +34,7 @@ func on_enter_hole(index: int = -1) -> void:
 	#self.set_freeze_enabled(true);
 	self.set_deferred('freeze', true);
 	_stop_ball = true;
+	ball_entered_hole.emit(index);
 	
 func shoot(speed: float, torque: float = 0.0) -> void:
 	_stop_ball = false;

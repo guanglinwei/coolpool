@@ -8,6 +8,7 @@
 bounce = 1.0
 
 [node name="CueBall" instance=ExtResource("1_6ibym")]
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_lowwn")
 script = ExtResource("2_fwl1j")
 

@@ -7,7 +7,7 @@
 bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gk6bx"]
-radius = 3.16228
+radius = 3.0
 
 [node name="Ball" type="RigidBody2D" groups=["ball"]]
 physics_material_override = SubResource("PhysicsMaterial_ja1hk")

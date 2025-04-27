@@ -1,22 +1,309 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhmeps37k3kt5"]
+[gd_scene load_steps=27 format=3 uid="uid://dhmeps37k3kt5"]
 
 [ext_resource type="PackedScene" uid="uid://cdv8k7w8m6gkq" path="res://scenes/Table.tscn" id="1_oasga"]
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://scenes/Ball.tscn" id="2_yiydf"]
 [ext_resource type="PackedScene" uid="uid://bxng4x3ulvar8" path="res://scenes/Cue_Ball.tscn" id="4_2c33b"]
 [ext_resource type="PackedScene" uid="uid://dk0x1sbdvcg2b" path="res://scenes/Cue.tscn" id="4_kstpv"]
 [ext_resource type="Script" uid="uid://2pa1ty5pa34m" path="res://scripts/game/game_controller.gd" id="5_a3rjs"]
+[ext_resource type="Texture2D" uid="uid://bexd4yul03ajp" path="res://sprites/NinePatchGameUIBox.png" id="6_1l7yb"]
+[ext_resource type="FontFile" uid="uid://dmgqqog064tt3" path="res://fonts/Retro Gaming.ttf" id="6_b7gnn"]
+[ext_resource type="Script" uid="uid://b570l2fdb0t48" path="res://scripts/ui/game_ui_controller.gd" id="6_f2c48"]
+[ext_resource type="Texture2D" uid="uid://bhqnsufvl6ctd" path="res://sprites/Target_Score.png" id="7_vvsdy"]
+[ext_resource type="Texture2D" uid="uid://cre5g0h68hdy5" path="res://sprites/NinePatchGameUIBoxThin.png" id="9_cpt0t"]
+[ext_resource type="Texture2D" uid="uid://cr3fo3s8h0kii" path="res://sprites/LionNeutral.png" id="9_i6wy6"]
+[ext_resource type="Texture2D" uid="uid://ckvylvo40yu5y" path="res://sprites/Cross.png" id="9_vreuy"]
+[ext_resource type="Texture2D" uid="uid://xbgsy7h1awu2" path="res://sprites/LionOkHappy.png" id="10_ifqfc"]
+[ext_resource type="Texture2D" uid="uid://w5qlf4c2gxj7" path="res://sprites/LionOkSad.png" id="11_ho07e"]
+[ext_resource type="Texture2D" uid="uid://co2d8rq4a3u00" path="res://sprites/LionSuperHappy.png" id="12_k13cj"]
+[ext_resource type="Texture2D" uid="uid://bf3c6n1w85q3c" path="res://sprites/LionSuperSad.png" id="13_qfm1g"]
+[ext_resource type="Texture2D" uid="uid://ckm440rpvc6rj" path="res://sprites/Equals.png" id="16_ifqfc"]
+[ext_resource type="Texture2D" uid="uid://7e1j44lxubvc" path="res://sprites/Single_Up.png" id="16_se1as"]
+[ext_resource type="Texture2D" uid="uid://infgobu30e4j" path="res://sprites/Double_Up.png" id="17_f2c48"]
+[ext_resource type="Texture2D" uid="uid://cse0yx23a63t0" path="res://sprites/Single_Down.png" id="18_n7yoc"]
+[ext_resource type="Texture2D" uid="uid://bhmtpgyt4he0k" path="res://sprites/Double_Down.png" id="19_ymf0f"]
+[ext_resource type="Texture2D" uid="uid://bbps0e40eub7n" path="res://sprites/YES.png" id="21_n7yoc"]
+
+[sub_resource type="Gradient" id="Gradient_i6wy6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cpt0t"]
+gradient = SubResource("Gradient_i6wy6")
+width = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vreuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_i6wy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ifqfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ho07e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_k13cj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_qfm1g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_50826"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_se1as")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_f2c48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_n7yoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ymf0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_n7yoc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="PoolScene" type="Node2D"]
 
 [node name="Table" parent="." instance=ExtResource("1_oasga")]
-position = Vector2(70, 90)
+position = Vector2(250, 90)
 
 [node name="Cue" parent="." instance=ExtResource("4_kstpv")]
 
 [node name="CueBall" parent="." instance=ExtResource("4_2c33b")]
-position = Vector2(70, 93)
+position = Vector2(250, 128)
 
 [node name="RegularBalls" type="Node" parent="."]
+
+[node name="GameUI" type="Node2D" parent="."]
+script = ExtResource("6_f2c48")
+
+[node name="Control" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 180.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameUI/Control"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 180.0
+texture = SubResource("GradientTexture1D_cpt0t")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameUI/Control"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 170.0
+offset_bottom = 170.0
+texture = ExtResource("6_1l7yb")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Header" type="Control" parent="GameUI/Control/NinePatchRect"]
+anchors_preset = 0
+offset_left = 113.0
+offset_top = 25.0
+offset_right = 113.0
+offset_bottom = 25.0
+
+[node name="TargetScoreTitle" type="Sprite2D" parent="GameUI/Control/NinePatchRect/Header"]
+position = Vector2(-1, -11)
+texture = ExtResource("7_vvsdy")
+
+[node name="TargetScore" type="Label" parent="GameUI/Control/NinePatchRect/Header"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -6.0
+offset_right = 43.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_b7gnn")
+theme_override_font_sizes/font_size = 18
+text = "9999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lion" type="AnimatedSprite2D" parent="GameUI/Control/NinePatchRect/Header"]
+position = Vector2(-84, -3)
+sprite_frames = SubResource("SpriteFrames_vreuy")
+
+[node name="ScoreBox" type="Control" parent="GameUI/Control/NinePatchRect"]
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 62.0
+offset_right = 80.0
+offset_bottom = 62.0
+
+[node name="TextureRect2" type="TextureRect" parent="GameUI/Control/NinePatchRect/ScoreBox"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 4.0
+offset_bottom = 4.0
+texture = ExtResource("9_vreuy")
+stretch_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameUI/Control/NinePatchRect/ScoreBox"]
+layout_mode = 0
+offset_left = -74.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = 11.0
+texture = ExtResource("9_cpt0t")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="CurrentBaseScore" type="Label" parent="GameUI/Control/NinePatchRect/ScoreBox/NinePatchRect"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -15.0
+offset_right = 34.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_b7gnn")
+theme_override_font_sizes/font_size = 12
+text = "1234567"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="GameUI/Control/NinePatchRect/ScoreBox"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -10.0
+offset_right = 75.0
+offset_bottom = 11.0
+texture = ExtResource("9_cpt0t")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="CurrentMult" type="Label" parent="GameUI/Control/NinePatchRect/ScoreBox/NinePatchRect2"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -15.0
+offset_right = 34.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_b7gnn")
+theme_override_font_sizes/font_size = 12
+text = "1234567"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="GameUI/Control/NinePatchRect/ScoreBox"]
+layout_mode = 0
+offset_left = -59.0
+offset_top = 17.0
+offset_right = 24.0
+offset_bottom = 38.0
+texture = ExtResource("9_cpt0t")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="CurrentTotalScore" type="Label" parent="GameUI/Control/NinePatchRect/ScoreBox/NinePatchRect3"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -8.5
+offset_right = 37.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_b7gnn")
+theme_override_font_sizes/font_size = 12
+text = "99999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreTip" type="Label" parent="GameUI/Control/NinePatchRect/ScoreBox"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 27.0
+offset_top = 29.0
+offset_right = 73.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_b7gnn")
+theme_override_font_sizes/font_size = 8
+text = "TOO HIGH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Arrow" type="AnimatedSprite2D" parent="GameUI/Control/NinePatchRect/ScoreBox/ScoreTip"]
+position = Vector2(23, -7)
+sprite_frames = SubResource("SpriteFrames_50826")
+frame = 1
+
+[node name="Equals" type="TextureRect" parent="GameUI/Control/NinePatchRect/ScoreBox"]
+layout_mode = 0
+offset_left = -71.0
+offset_top = 24.0
+offset_right = -64.0
+offset_bottom = 31.0
+texture = ExtResource("16_ifqfc")
+stretch_mode = 2
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("5_a3rjs")
