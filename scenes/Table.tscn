@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdv8k7w8m6gkq"]
 
 [ext_resource type="Texture2D" uid="uid://bxo3x8ebtbf4t" path="res://sprites/PoolTable.png" id="1_so1t7"]
-[ext_resource type="Script" uid="uid://4rwrgddnljvk" path="res://scripts/bumpers.gd" id="2_1euqw"]
-[ext_resource type="Script" uid="uid://ph6hpou3q6u7" path="res://scenes/holes.gd" id="3_1euqw"]
+[ext_resource type="Script" uid="uid://4rwrgddnljvk" path="res://scripts/game/bumpers.gd" id="2_1euqw"]
+[ext_resource type="Script" uid="uid://ph6hpou3q6u7" path="res://scripts/game/holes.gd" id="3_1euqw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1euqw"]
 

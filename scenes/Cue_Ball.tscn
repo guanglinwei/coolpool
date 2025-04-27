@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxng4x3ulvar8"]
 
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://scenes/Ball.tscn" id="1_6ibym"]
-[ext_resource type="Script" uid="uid://o2leh7c0vhaj" path="res://scripts/cue_ball.gd" id="2_fwl1j"]
+[ext_resource type="Script" uid="uid://o2leh7c0vhaj" path="res://scripts/game/cue_ball.gd" id="2_fwl1j"]
 [ext_resource type="Texture2D" uid="uid://bxlp6hsj6obxb" path="res://sprites/CueBall.png" id="3_lowwn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lowwn"]

@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0yuw82dn07bd"]
+
+[ext_resource type="Texture2D" uid="uid://cxty8pxxqlv34" path="res://sprites/MainScreen.png" id="1_1n5op"]
+[ext_resource type="Script" uid="uid://dsr5ocafism3n" path="res://scripts/ui/main_menu_ui_controller.gd" id="2_inw2d"]
+[ext_resource type="Script" uid="uid://r80n0iyw8whw" path="res://scripts/ui/start_button.gd" id="2_ukex0"]
+[ext_resource type="Texture2D" uid="uid://bxlp6hsj6obxb" path="res://sprites/CueBall.png" id="3_r1oop"]
+
+[node name="HomeScene" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_1n5op")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_inw2d")
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 55.0
+offset_top = 86.0
+offset_right = 246.0
+offset_bottom = 122.0
+script = ExtResource("2_ukex0")
+
+[node name="HowToPlayButton" type="Button" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 57.0
+offset_top = 124.0
+offset_right = 248.0
+offset_bottom = 160.0
+
+[node name="Selectors" type="Node2D" parent="."]
+position = Vector2(54, 104)
+
+[node name="Selector" type="Sprite2D" parent="Selectors"]
+texture = ExtResource("3_r1oop")
+
+[node name="Selector2" type="Sprite2D" parent="Selectors"]
+position = Vector2(195, 0)
+texture = ExtResource("3_r1oop")

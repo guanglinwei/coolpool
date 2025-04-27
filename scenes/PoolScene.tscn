@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://scenes/Ball.tscn" id="2_yiydf"]
 [ext_resource type="PackedScene" uid="uid://bxng4x3ulvar8" path="res://scenes/Cue_Ball.tscn" id="4_2c33b"]
 [ext_resource type="PackedScene" uid="uid://dk0x1sbdvcg2b" path="res://scenes/Cue.tscn" id="4_kstpv"]
-[ext_resource type="Script" uid="uid://2pa1ty5pa34m" path="res://scripts/game_controller.gd" id="5_a3rjs"]
+[ext_resource type="Script" uid="uid://2pa1ty5pa34m" path="res://scripts/game/game_controller.gd" id="5_a3rjs"]
 
-[node name="Root" type="Node2D"]
+[node name="PoolScene" type="Node2D"]
 
 [node name="Table" parent="." instance=ExtResource("1_oasga")]
 position = Vector2(70, 90)

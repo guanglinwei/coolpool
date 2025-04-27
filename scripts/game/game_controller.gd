@@ -5,8 +5,12 @@ var balls: Array[Ball] = [];
 @onready var table: Node2D = $'../Table';
 
 var current_score: int = 0;
-var curr_mult: float = 1.0;
-var curr_base_score: int = 3;
+var curr_mult: float = 1.0:
+	set(value):
+		current_score = round(value * curr_base_score);
+var curr_base_score: int = 0:
+	set(value):
+		current_score = round(curr_mult * value);
 var target_score: int = 0;
 var acceptable_range: Array[float] = [0.8, 1.2];
 var level: int = 1;
@@ -30,9 +34,14 @@ func init_level(level: int):
 	
 func end_level():
 	# check if meet score range
-	# lose life if not
-	# move on if yes
-	pass
+	if current_score < target_score * acceptable_range[0] or \
+		current_score > target_score * acceptable_range[1]:
+			lives -= 1;
+			init_level(level);
+			
+	else:
+		level += 1;
+		init_level(level);
 	
 func create_ball() -> Ball:
 	var ball = ball_scene.instantiate() as Ball;
@@ -50,7 +59,7 @@ func setup_balls(rows: int = 5):
 				ball = create_ball();
 			else:
 				ball = balls[count];
-			#var b = ball_scene.instantiate()
+				
 			var pos = table.position + Vector2((row * gap) + (col * gap / 2), (col * gap)) - \
 				Vector2.RIGHT * (rows - 1) * gap / 2 + \
 				Vector2.UP * (rows / 2 * gap + 35);
