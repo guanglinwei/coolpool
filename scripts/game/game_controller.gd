@@ -33,6 +33,7 @@ var curr_cue_balls: int = max_cue_balls;
 func _ready() -> void:
 	game_ui.reset();
 	init_level(level);
+
 	
 func init_level(level: int):
 	var ball_rows = 3;
@@ -85,3 +86,36 @@ func setup_balls(rows: int = 5):
 
 func on_ball_entered_hole(index: int = -1):
 	curr_base_score += 1;
+
+func out_of_balls():
+	if curr_cue_balls == 0:
+		curr_cue_balls = max_cue_balls;
+		end_level();
+
+	
+func lose_a_ball():
+	curr_cue_balls -= 1;
+	update_ball_ui()
+	play_ball_explosion()
+	if curr_cue_balls <= 0:
+		out_of_balls();
+
+
+
+
+
+func update_ball_ui():
+	$BallCounter.update(curr_cue_balls)
+
+func play_ball_explosion():
+	var ball_name_list = ["Ball", "balls2", "balls3", "balls4", "balls5"]
+	#if balls die, they explode with the three animations
+	
+	
+func game_over():
+	if lives == 0:
+		#game over scene
+		get_tree().change_scene("Game_Over.tscn")
+		#maybe play some music idk
+	
+	
