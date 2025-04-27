@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dhmeps37k3kt5"]
+[gd_scene load_steps=32 format=3 uid="uid://dhmeps37k3kt5"]
 
 [ext_resource type="PackedScene" uid="uid://cdv8k7w8m6gkq" path="res://scenes/Table.tscn" id="1_oasga"]
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://scenes/Ball.tscn" id="2_yiydf"]
@@ -21,12 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://infgobu30e4j" path="res://sprites/Double_Up.png" id="17_f2c48"]
 [ext_resource type="Texture2D" uid="uid://cse0yx23a63t0" path="res://sprites/Single_Down.png" id="18_n7yoc"]
 [ext_resource type="Texture2D" uid="uid://bhmtpgyt4he0k" path="res://sprites/Double_Down.png" id="19_ymf0f"]
-[ext_resource type="Script" uid="uid://bfbs7qmryyfv7" path="res://scenes/balls.gd" id="21_50826"]
+[ext_resource type="Script" path="res://scenes/balls.gd" id="21_50826"]
 [ext_resource type="Texture2D" uid="uid://bbps0e40eub7n" path="res://sprites/YES.png" id="21_n7yoc"]
+[ext_resource type="Texture2D" uid="uid://sy3hx0icguq5" path="res://sprites/Ball.png" id="22_c4kwd"]
 [ext_resource type="PackedScene" uid="uid://cdopphgestar5" path="res://scenes/PlusBumperSmall.tscn" id="23_ymf0f"]
 [ext_resource type="PackedScene" uid="uid://mb1yhtkyi3ni" path="res://scenes/NegativePizza.tscn" id="24_50826"]
 [ext_resource type="PackedScene" uid="uid://bg2but7uqcv7q" path="res://scenes/MultBumperSmall.tscn" id="25_c4kwd"]
-[ext_resource type="Texture2D" uid="uid://sy3hx0icguq5" path="res://sprites/Ball.png" id="22_c4kwd"]
 
 [sub_resource type="Gradient" id="Gradient_i6wy6"]
 offsets = PackedFloat32Array(0)
