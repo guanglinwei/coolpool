@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg2but7uqcv7q"]
+
+[ext_resource type="Texture2D" uid="uid://dsu5qa3jnegiv" path="res://sprites/Mult13.png" id="1_eallk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hef3f"]
+bounce = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_55x12"]
+radius = 6.0
+
+[node name="MultBumperSmall" type="RigidBody2D" groups=["mult_bumper"]]
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_hef3f")
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_eallk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["mult_bumper"]]
+shape = SubResource("CircleShape2D_55x12")

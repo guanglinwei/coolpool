@@ -7,9 +7,10 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lowwn"]
 bounce = 1.0
 
-[node name="CueBall" instance=ExtResource("1_6ibym")]
-collision_mask = 3
+[node name="CueBall" groups=["cue_ball"] instance=ExtResource("1_6ibym")]
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_lowwn")
+continuous_cd = 1
 script = ExtResource("2_fwl1j")
 
 [node name="Sprite2D" parent="." index="0" groups=["ball", "cue_ball"]]

@@ -9,5 +9,6 @@ func on_enter_hole(index: int = -1) -> void:
 	self.visible = true;
 	
 func _physics_process(delta: float) -> void:
-	#print(self.linear_velocity)
+	##print(self.linear_velocity)
 	super(delta);
+	#print(get_colliding_bodies())

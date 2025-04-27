@@ -11,11 +11,17 @@ var last_velocities: Array[Vector2] = [];
 const max_remembered_velocities = 16;
 var curr_vel_ind = 0;
 
+var can_score_on_bump: bool = true;
+
 signal ball_entered_hole(index: int);
+signal ball_hit_bumper(bumper_type: GameController.BumperType);
 
 func _ready() -> void:
+	body_entered.connect(handle_collision);
+	
 	for i in range(max_remembered_velocities):
 		last_velocities.append(Vector2.INF);
+		
 	setup();
 	
 func setup() -> void:
@@ -41,14 +47,15 @@ func shoot(speed: float, torque: float = 0.0) -> void:
 	self.apply_impulse(Vector2(randf() - 0.5, randf() - 0.5).normalized() * 1000);
 	self.apply_torque_impulse((randf() - 0.5) * 10000 );
 	
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
 	#var collision_info = move_and_collide(linear_velocity * delta);
 	#rotate(angular_velocity * delta);
 	#if collision_info:
 		#if (collision_info.get_collider() as CollisionObject2D).is_in_group('ball'):
+			#print('ball')
 			##print('hole')
 			#pass;
-		##linear_velocity = linear_velocity.bounce(collision_info.get_normal());
+		#linear_velocity = linear_velocity.bounce(collision_info.get_normal());
 	#if last_velocities.size() != max_remembered_velocities:
 	
 	var vel_not_changing = last_velocities.all(func (v): return v == self.linear_velocity);
@@ -73,3 +80,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		_stop_ball = false;
 		state.linear_velocity = Vector2.ZERO;
 		state.angular_velocity = 0;
+
+func handle_collision(node: Node):
+	if node is not CollisionObject2D:
+		return;
+		
+	var coll_obj = node as CollisionObject2D;
+	if coll_obj.is_in_group('plus_bumper'):
+		ball_hit_bumper.emit(GameController.BumperType.ADD);
+	elif coll_obj.is_in_group('minus_bumper'):
+		ball_hit_bumper.emit(GameController.BumperType.SUB);
+	elif coll_obj.is_in_group('mult_bumper'):
+		ball_hit_bumper.emit(GameController.BumperType.MULT);
+	elif coll_obj.is_in_group('div_bumper'):
+		ball_hit_bumper.emit(GameController.BumperType.DIV);
