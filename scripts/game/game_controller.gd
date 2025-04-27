@@ -124,10 +124,10 @@ func on_ball_hit_bumper(bumper_type: BumperType):
 func generate_level(level: int):
 	randi_range(TABLE_MIN_X, TABLE_MAX_X);
 
+# TODO: fix this functionality
 func out_of_balls():
-	if curr_cue_balls == 0:
-		curr_cue_balls = max_cue_balls;
-		end_level();
+	#curr_cue_balls = max_cue_balls;
+	end_level();
 
 	
 func lose_a_ball():
@@ -137,12 +137,8 @@ func lose_a_ball():
 	if curr_cue_balls <= 0:
 		out_of_balls();
 
-
-
-
-
 func update_ball_ui():
-	$BallCounter.update(curr_cue_balls)
+	game_ui.balls_display.update_ball_state(curr_cue_balls);
 
 func play_ball_explosion():
 	var ball_name_list = ["Ball", "balls2", "balls3", "balls4", "balls5"]
@@ -152,7 +148,8 @@ func play_ball_explosion():
 func game_over():
 	if lives == 0:
 		#game over scene
-		get_tree().change_scene("Game_Over.tscn")
+		#get_tree().change_scene("Game_Over.tscn")
+		SceneManager.switch_scene('Game_Over');
 		#maybe play some music idk
 	
 	

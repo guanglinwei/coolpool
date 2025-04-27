@@ -37,7 +37,7 @@ func shoot_ball(ball: Ball) -> void:
 	ball.apply_torque_impulse(current_power * (randf() - 0.5) * shoot_torque_modifier);
 	current_power = 0;
 	#just added this
-	$"/root/Game_Controller".lose_a_ball()
+	$"../GameController".lose_a_ball()
 	
 
 func _process(delta: float) -> void:
