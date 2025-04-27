@@ -3,6 +3,8 @@ extends AnimatedSprite2D;
 
 #var viewport: Viewport = get_viewport();
 
+@onready var indicator: Line2D = $Indicator;
+
 var ball_to_shoot: Ball = null;
 var shoot_speed: float = 480.0;
 var current_power: float = 0.0;
@@ -54,6 +56,11 @@ func _process(delta: float) -> void:
 			self.position = ball_to_shoot.position \
 			- (dist_to_ball + 44.0 + current_power * POWER_TO_BALL_DIST) * current_shoot_dir;
 			self.rotation = (-current_shoot_dir).angle() + 3*PI/2;
+			
+			# Directional indicator
+			indicator.position.y = -dist_to_ball - 44.0 - current_power * POWER_TO_BALL_DIST;
+			indicator.points[1].x = 66.0 * (1.0 + current_power / 2.0);
+			(indicator.texture as GradientTexture1D).width = 8 + 4 * current_power;
 			
 			if can_shoot_ball:
 				if Input.is_action_just_pressed("LeftClick"):

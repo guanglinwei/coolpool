@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk0x1sbdvcg2b"]
+[gd_scene load_steps=6 format=3 uid="uid://dk0x1sbdvcg2b"]
 
 [ext_resource type="Texture2D" uid="uid://bim2vo4b8a3ht" path="res://sprites/CueStick.png" id="1_ex6xp"]
 [ext_resource type="Script" uid="uid://cf2h3kdmfoxvp" path="res://scripts/game/cue_stick.gd" id="2_x4x3d"]
@@ -14,7 +14,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_ex6xp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.00757576, 0.5)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.870588)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_evgq2"]
+gradient = SubResource("Gradient_ex6xp")
+width = 8
+
 [node name="Cue" type="AnimatedSprite2D"]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_vh2b3")
 script = ExtResource("2_x4x3d")
+
+[node name="Indicator" type="Line2D" parent="."]
+texture_repeat = 2
+rotation = 4.71239
+points = PackedVector2Array(0, 0, 66, 0)
+width = 2.0
+texture = SubResource("GradientTexture1D_evgq2")
+texture_mode = 1

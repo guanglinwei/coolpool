@@ -24,11 +24,13 @@ func reset() -> void:
 	#position = start_position;
 	_reset_position = true;
 	_stop_ball = false;
+	self.set_deferred('freeze', false);
 		
 func on_enter_hole(index: int = -1) -> void:
 	# TODO: score points
 	self.visible = false;
-	self.freeze = true;
+	#self.set_freeze_enabled(true);
+	self.set_deferred('freeze', true);
 	_stop_ball = true;
 	
 func shoot(speed: float, torque: float = 0.0) -> void:

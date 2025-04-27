@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0yuw82dn07bd"]
+[gd_scene load_steps=6 format=3 uid="uid://b0yuw82dn07bd"]
 
 [ext_resource type="Texture2D" uid="uid://cxty8pxxqlv34" path="res://sprites/MainScreen.png" id="1_1n5op"]
 [ext_resource type="Script" uid="uid://dsr5ocafism3n" path="res://scripts/ui/main_menu_ui_controller.gd" id="2_inw2d"]
 [ext_resource type="Script" uid="uid://r80n0iyw8whw" path="res://scripts/ui/start_button.gd" id="2_ukex0"]
 [ext_resource type="Texture2D" uid="uid://bxlp6hsj6obxb" path="res://sprites/CueBall.png" id="3_r1oop"]
+[ext_resource type="Script" uid="uid://c5vq21x55ndu3" path="res://scripts/ui/how_to_play_button.gd" id="4_va7cf"]
 
 [node name="HomeScene" type="Node2D"]
 
@@ -13,7 +14,7 @@ centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="MenuOptions" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +25,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_inw2d")
 
-[node name="StartButton" type="Button" parent="CanvasLayer/Control"]
+[node name="StartButton" type="Button" parent="CanvasLayer/MenuOptions"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 55.0
@@ -33,13 +34,14 @@ offset_right = 246.0
 offset_bottom = 122.0
 script = ExtResource("2_ukex0")
 
-[node name="HowToPlayButton" type="Button" parent="CanvasLayer/Control"]
+[node name="HowToPlayButton" type="Button" parent="CanvasLayer/MenuOptions"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 57.0
 offset_top = 124.0
 offset_right = 248.0
 offset_bottom = 160.0
+script = ExtResource("4_va7cf")
 
 [node name="Selectors" type="Node2D" parent="."]
 position = Vector2(54, 104)

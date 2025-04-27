@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="CoolPool"
-run/main_scene="uid://dhmeps37k3kt5"
+run/main_scene="uid://b0yuw82dn07bd"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
+
+[autoload]
+
+SceneManager="*res://scripts/util/SceneManager.gd"
 
 [display]
 
