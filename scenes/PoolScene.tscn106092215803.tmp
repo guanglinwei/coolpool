@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dhmeps37k3kt5"]
+[gd_scene load_steps=28 format=3 uid="uid://dhmeps37k3kt5"]
 
 [ext_resource type="PackedScene" uid="uid://cdv8k7w8m6gkq" path="res://scenes/Table.tscn" id="1_oasga"]
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://scenes/Ball.tscn" id="2_yiydf"]
@@ -23,8 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://bhmtpgyt4he0k" path="res://sprites/Double_Down.png" id="19_ymf0f"]
 [ext_resource type="Texture2D" uid="uid://bbps0e40eub7n" path="res://sprites/YES.png" id="21_n7yoc"]
 [ext_resource type="PackedScene" uid="uid://cdopphgestar5" path="res://scenes/PlusBumperSmall.tscn" id="23_ymf0f"]
-[ext_resource type="PackedScene" uid="uid://mb1yhtkyi3ni" path="res://scenes/NegativePizza.tscn" id="24_50826"]
-[ext_resource type="PackedScene" uid="uid://bg2but7uqcv7q" path="res://scenes/MultBumperSmall.tscn" id="25_c4kwd"]
 
 [sub_resource type="Gradient" id="Gradient_i6wy6"]
 offsets = PackedFloat32Array(0)
@@ -311,12 +309,9 @@ stretch_mode = 2
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("5_a3rjs")
 ball_scene = ExtResource("2_yiydf")
+curr_mult = null
+curr_base_score = null
+target_score = null
 
 [node name="PlusBumperSmall" parent="." instance=ExtResource("23_ymf0f")]
 position = Vector2(227, 114)
-
-[node name="NegativePizza" parent="." instance=ExtResource("24_50826")]
-position = Vector2(272, 110)
-
-[node name="MultBumperSmall" parent="." instance=ExtResource("25_c4kwd")]
-position = Vector2(266, 87)

@@ -10,7 +10,11 @@ bounce = 1.0
 radius = 3.0
 
 [node name="Ball" type="RigidBody2D" groups=["ball"]]
+collision_mask = 5
+collision_priority = 2.0
 physics_material_override = SubResource("PhysicsMaterial_ja1hk")
+contact_monitor = true
+max_contacts_reported = 12
 script = ExtResource("1_lww6v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

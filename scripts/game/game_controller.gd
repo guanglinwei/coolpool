@@ -1,9 +1,13 @@
+class_name GameController;
 extends Node;
 
 @export var ball_scene: PackedScene;
 var balls: Array[Ball] = [];
+@onready var cue_ball: CueBall = $'../CueBall';
 @onready var table: Node2D = $'../Table';
 @onready var game_ui: GameUIController = $'../GameUI';
+
+enum BumperType {ADD, SUB, MULT, DIV};
 
 var current_score: int = 0:
 	set(value):
@@ -33,6 +37,7 @@ var curr_cue_balls: int = max_cue_balls;
 func _ready() -> void:
 	game_ui.reset();
 	init_level(level);
+	cue_ball.ball_hit_bumper.connect(on_ball_hit_bumper);
 	
 func init_level(level: int):
 	var ball_rows = 3;
@@ -64,6 +69,7 @@ func create_ball() -> Ball:
 	self.add_child(ball);
 	balls.append(ball);
 	ball.ball_entered_hole.connect(on_ball_entered_hole);
+	ball.ball_hit_bumper.connect(on_ball_hit_bumper);
 	return ball;
 		
 func setup_balls(rows: int = 5):
@@ -85,3 +91,18 @@ func setup_balls(rows: int = 5):
 
 func on_ball_entered_hole(index: int = -1):
 	curr_base_score += 1;
+
+func on_ball_hit_bumper(bumper_type: BumperType):
+	print('asdjfkl')
+	match bumper_type:
+		BumperType.ADD:
+			curr_base_score += 1;
+		BumperType.SUB:
+			curr_base_score = max(0, curr_base_score - 1);
+		BumperType.MULT:
+			curr_mult += 1;
+		BumperType.DIV:
+			curr_mult = max(0, curr_mult - 1);
+		_:
+			pass;
+	

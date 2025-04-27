@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://mb1yhtkyi3ni"]
+
+[ext_resource type="Texture2D" uid="uid://pgaglvbgfwre" path="res://sprites/Pizza_Bumper_B.png" id="1_40tr3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_40tr3"]
+bounce = 5.0
+
+[node name="NegativePizza" type="StaticBody2D" groups=["minus_bumper"]]
+collision_layer = 4
+physics_material_override = SubResource("PhysicsMaterial_40tr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_40tr3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["minus_bumper"]]
+polygon = PackedVector2Array(2, -11, -13, 10, 14, 3)
