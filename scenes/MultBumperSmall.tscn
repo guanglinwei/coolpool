@@ -9,7 +9,7 @@ bounce = 5.0
 radius = 6.0
 
 [node name="MultBumperSmall" type="RigidBody2D" groups=["mult_bumper"]]
-mass = 8.0
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_hef3f")
 lock_rotation = true
 

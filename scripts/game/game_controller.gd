@@ -6,12 +6,12 @@ var balls: Array[Ball] = [];
 @onready var cue_ball: CueBall = $'../CueBall';
 @onready var table: Node2D = $'../Table';
 @onready var game_ui: GameUIController = $'../GameUI';
+@onready var balls_parent: Node = $'../RegularBalls';
 
 enum BumperType {ADD, SUB, MULT, DIV};
 
 var current_score: int = 0:
 	set(value):
-		print(value);
 		current_score = value;
 		game_ui.update_scores(target_score, curr_base_score, curr_mult, value, 
 			round(acceptable_range[0] * target_score),
@@ -27,12 +27,24 @@ var current_score: int = 0:
 		curr_base_score = value;
 		current_score = round(curr_mult * value);
 @export var target_score: int = 0;
-var acceptable_range: Array[float] = [0.8, 1.2];
-var level: int = 1;
+var acceptable_range: Array[float] = [0.66, 1.5];
+var level: int = 9;
 
 var lives: int = 3;
 var max_cue_balls: int = 5;
 var curr_cue_balls: int = max_cue_balls;
+
+const TABLE_MIN_X = 212;
+const TABLE_MAX_X = 288;
+const TABLE_MIN_Y = 17;
+const TABLE_MAX_Y = 163;
+const INVALID_GEN_BOX_MIN_X = 236;
+const INVALID_GEN_BOX_MIN_Y = 41;
+const INVALID_GEN_BOX_MAX_X = 250;
+const INVALID_GEN_BOX_MAX_Y = 69;
+
+@export var easy_valid_bumpers: Array[PackedScene] = [];
+@export var hard_valid_bumpers: Array[PackedScene] = [];
 
 func _ready() -> void:
 	game_ui.reset();
@@ -41,10 +53,13 @@ func _ready() -> void:
 	
 func init_level(level: int):
 	var ball_rows = 3;
+	acceptable_range = [0.66, 1.5];
 	if level > 4:
 		ball_rows += 1;
+		acceptable_range = [0.7, 1.3];
 	if level > 8:
 		ball_rows += 1;
+		acceptable_range = [0.8, 1.2];
 	
 	curr_cue_balls = max_cue_balls;
 	target_score = round(12 + 5 * ((level - 1) ** 1.5));
@@ -66,7 +81,7 @@ func end_level():
 	
 func create_ball() -> Ball:
 	var ball = ball_scene.instantiate() as Ball;
-	self.add_child(ball);
+	balls_parent.add_child(ball);
 	balls.append(ball);
 	ball.ball_entered_hole.connect(on_ball_entered_hole);
 	ball.ball_hit_bumper.connect(on_ball_hit_bumper);
@@ -93,7 +108,6 @@ func on_ball_entered_hole(index: int = -1):
 	curr_base_score += 1;
 
 func on_ball_hit_bumper(bumper_type: BumperType):
-	print('asdjfkl')
 	match bumper_type:
 		BumperType.ADD:
 			curr_base_score += 1;
@@ -106,3 +120,5 @@ func on_ball_hit_bumper(bumper_type: BumperType):
 		_:
 			pass;
 	
+func generate_level(level: int):
+	randi_range(TABLE_MIN_X, TABLE_MAX_X);

@@ -313,7 +313,7 @@ script = ExtResource("5_a3rjs")
 ball_scene = ExtResource("2_yiydf")
 
 [node name="PlusBumperSmall" parent="." instance=ExtResource("23_ymf0f")]
-position = Vector2(227, 114)
+position = Vector2(223, 113)
 
 [node name="NegativePizza" parent="." instance=ExtResource("24_50826")]
 position = Vector2(272, 110)
