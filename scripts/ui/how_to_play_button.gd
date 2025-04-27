@@ -1,4 +1,4 @@
 extends Button;
 
 func _pressed() -> void:
-	print('How to play')
+	SceneManager.switch_scene('HowToPlay');
