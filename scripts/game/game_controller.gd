@@ -7,6 +7,7 @@ var balls: Array[Ball] = [];
 @onready var table: Node2D = $'../Table';
 @onready var game_ui: GameUIController = $'../GameUI';
 @onready var balls_parent: Node = $'../RegularBalls';
+var all_bumpers: Array[BaseBumper] = [];
 
 enum BumperType {ADD, SUB, MULT, DIV};
 
@@ -28,9 +29,12 @@ var current_score: int = 0:
 		current_score = round(curr_mult * value);
 @export var target_score: int = 0;
 var acceptable_range: Array[float] = [0.66, 1.5];
-var level: int = 9;
+var level: int = 1;
 
-var lives: int = 3;
+var lives: int = 3:
+	set(value):
+		lives = value;
+		game_ui.lives_display.text = 'Lives: ' + str(value);
 var max_cue_balls: int = 5;
 var curr_cue_balls: int = max_cue_balls;
 
@@ -47,10 +51,13 @@ const INVALID_GEN_BOX_MAX_Y = 69;
 @export var hard_valid_bumpers: Array[PackedScene] = [];
 
 func _ready() -> void:
+	for child in $'../Bumpers'.get_children():
+		var bumper = child as BaseBumper;
+		all_bumpers.append(bumper);
+		
 	game_ui.reset();
 	init_level(level);
 	cue_ball.ball_hit_bumper.connect(on_ball_hit_bumper);
-
 	
 func init_level(level: int):
 	var ball_rows = 3;
@@ -67,15 +74,24 @@ func init_level(level: int):
 	curr_base_score = 0;
 	curr_mult = 1;
 	current_score = 0;
+	
+	cue_ball.reset();
+	
+	update_ball_ui();
+	
 	setup_balls(ball_rows);
+	for bumper in all_bumpers:
+		bumper.reset();
 
 func end_level():
 	# check if meet score range
 	if current_score < target_score * acceptable_range[0] or \
 		current_score > target_score * acceptable_range[1]:
 			lives -= 1;
-			init_level(level);
-			
+			if lives <= 0:
+				game_over();
+			else:
+				init_level(level);
 	else:
 		level += 1;
 		init_level(level);
@@ -102,11 +118,19 @@ func setup_balls(rows: int = 5):
 			var pos = table.position + Vector2((row * gap) + (col * gap / 2), (col * gap)) - \
 				Vector2.RIGHT * (rows - 1) * gap / 2 + \
 				Vector2.UP * (rows / 2 * gap + 35);
+			
+			ball.setup(pos);
 			ball.position = pos;
+			ball._reset_position = true;
+			#ball.linear_velocity = Vector2.ZERO;
+			#ball.angular_velocity = 0;
+			#print('reset ball')
 			count += 1
 
 func on_ball_entered_hole(index: int = -1):
-	curr_base_score += 1;
+	curr_base_score += level;
+	curr_cue_balls = min(5, curr_cue_balls + 1);
+	update_ball_ui();
 
 func on_ball_hit_bumper(bumper_type: BumperType):
 	match bumper_type:
@@ -126,16 +150,14 @@ func generate_level(level: int):
 
 # TODO: fix this functionality
 func out_of_balls():
-	#curr_cue_balls = max_cue_balls;
 	end_level();
 
-	
 func lose_a_ball():
 	curr_cue_balls -= 1;
 	update_ball_ui()
 	play_ball_explosion()
-	if curr_cue_balls <= 0:
-		out_of_balls();
+	#if curr_cue_balls <= 0:
+		#out_of_balls();
 
 func update_ball_ui():
 	game_ui.balls_display.update_ball_state(curr_cue_balls);
@@ -146,10 +168,13 @@ func play_ball_explosion():
 	
 	
 func game_over():
-	if lives == 0:
-		#game over scene
-		#get_tree().change_scene("Game_Over.tscn")
-		SceneManager.switch_scene('Game_Over');
-		#maybe play some music idk
+	#game over scene
+	#get_tree().change_scene("Game_Over.tscn")
+	SceneManager.switch_scene('Game_Over');
+	#maybe play some music idk
 	
-	
+func _physics_process(delta: float) -> void:
+	if curr_cue_balls <= 0 and \
+		cue_ball.linear_velocity == Vector2.ZERO and \
+		balls.all(func(b): return b.linear_velocity == Vector2.ZERO):
+			out_of_balls();

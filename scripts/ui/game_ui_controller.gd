@@ -9,6 +9,7 @@ extends Node2D;
 @onready var score_tip: Label = $Control/NinePatchRect/ScoreBox/ScoreTip;
 @onready var score_tip_arrow: AnimatedSprite2D = $Control/NinePatchRect/ScoreBox/ScoreTip/Arrow;
 @onready var balls_display: BallsDisplayController = $Balls;
+@onready var lives_display: Label = $Control/NinePatchRect/ScoreBox/LifeCount;
 
 var _target_score: int;
 var _base_score: int;

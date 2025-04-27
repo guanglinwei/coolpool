@@ -4,6 +4,7 @@ extends AnimatedSprite2D;
 #var viewport: Viewport = get_viewport();
 
 @onready var indicator: Line2D = $Indicator;
+@onready var game_controller: GameController = $"../GameController";
 
 var ball_to_shoot: Ball = null;
 var shoot_speed: float = 480.0;
@@ -16,6 +17,7 @@ var current_shoot_dir: Vector2 = Vector2.ZERO;
 var can_shoot_ball: bool = true;
 var ball_was_moving_last_frame = false;
 var is_about_to_shoot: bool = false;
+
 const MAX_CAN_SHOOT_SPEED: float = 3.0;
 const POWER_METER_FILL_SPEED: float = 1.0;
 const POWER_TO_BALL_DIST: float = 30.0;
@@ -37,7 +39,7 @@ func shoot_ball(ball: Ball) -> void:
 	ball.apply_torque_impulse(current_power * (randf() - 0.5) * shoot_torque_modifier);
 	current_power = 0;
 	#just added this
-	$"../GameController".lose_a_ball()
+	game_controller.lose_a_ball()
 	
 
 func _process(delta: float) -> void:
@@ -47,7 +49,8 @@ func _process(delta: float) -> void:
 			#ball_to_shoot.linear_velocity == Vector2.ZERO and \
 			#not can_shoot_ball:
 			#set_can_shoot_ball(true);
-		if not can_shoot_ball and ball_to_shoot.linear_velocity.length() <= MAX_CAN_SHOOT_SPEED:
+		if not can_shoot_ball and ball_to_shoot.linear_velocity.length() <= MAX_CAN_SHOOT_SPEED and\
+			game_controller.curr_cue_balls > 0:
 			set_can_shoot_ball(true);
 		ball_was_moving_last_frame = ball_to_shoot.linear_velocity == Vector2.ZERO;
 		

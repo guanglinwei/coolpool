@@ -12,6 +12,7 @@ radius = 3.0
 [node name="Ball" type="RigidBody2D" groups=["ball"]]
 collision_mask = 5
 collision_priority = 2.0
+mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_ja1hk")
 contact_monitor = true
 max_contacts_reported = 12

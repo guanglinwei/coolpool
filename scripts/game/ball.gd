@@ -22,11 +22,11 @@ func _ready() -> void:
 	for i in range(max_remembered_velocities):
 		last_velocities.append(Vector2.INF);
 		
-	setup();
+	#setup();
 	
-func setup() -> void:
-	#position = Vector2(800, 600);
-	pass;
+func setup(start_pos: Vector2) -> void:
+	start_position = start_pos;
+	self.visible = true;
 	
 func reset() -> void:
 	#position = start_position;

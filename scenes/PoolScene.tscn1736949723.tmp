@@ -94,17 +94,6 @@ position = Vector2(250, 128)
 
 [node name="RegularBalls" type="Node" parent="."]
 
-[node name="Bumpers" type="Node2D" parent="."]
-
-[node name="PlusBumperSmall" parent="Bumpers" instance=ExtResource("23_ymf0f")]
-position = Vector2(223, 113)
-
-[node name="NegativePizza" parent="Bumpers" instance=ExtResource("24_50826")]
-position = Vector2(272, 110)
-
-[node name="MultBumperSmall" parent="Bumpers" instance=ExtResource("25_c4kwd")]
-position = Vector2(266, 87)
-
 [node name="GameUI" type="Node2D" parent="."]
 script = ExtResource("6_f2c48")
 
@@ -312,26 +301,6 @@ position = Vector2(23, -7)
 sprite_frames = SubResource("SpriteFrames_50826")
 frame = 1
 
-[node name="LifeCount" type="Label" parent="GameUI/Control/NinePatchRect/ScoreBox"]
-z_index = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = 53.0
-offset_right = -15.0
-offset_bottom = 66.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_b7gnn")
-theme_override_font_sizes/font_size = 10
-text = "Lives: 3"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Equals" type="TextureRect" parent="GameUI/Control/NinePatchRect/ScoreBox"]
 layout_mode = 0
 offset_left = -71.0
@@ -367,3 +336,12 @@ texture = ExtResource("22_c4kwd")
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("5_a3rjs")
 ball_scene = ExtResource("2_yiydf")
+
+[node name="PlusBumperSmall" parent="." instance=ExtResource("23_ymf0f")]
+position = Vector2(223, 113)
+
+[node name="NegativePizza" parent="." instance=ExtResource("24_50826")]
+position = Vector2(272, 110)
+
+[node name="MultBumperSmall" parent="." instance=ExtResource("25_c4kwd")]
+position = Vector2(266, 87)
