@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdv8k7w8m6gkq"]
+[gd_scene load_steps=8 format=3 uid="uid://cdv8k7w8m6gkq"]
 
 [ext_resource type="Texture2D" uid="uid://bxo3x8ebtbf4t" path="res://sprites/PoolTable.png" id="1_so1t7"]
 [ext_resource type="Script" uid="uid://4rwrgddnljvk" path="res://scripts/bumpers.gd" id="2_1euqw"]
+[ext_resource type="Script" uid="uid://ph6hpou3q6u7" path="res://scenes/holes.gd" id="3_1euqw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1euqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vh2b3"]
-size = Vector2(24, 65)
+size = Vector2(76, 65)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_so1t7"]
-size = Vector2(68, 30)
+size = Vector2(68, 63)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1euqw"]
-size = Vector2(24, 6)
+size = Vector2(75.5, 6)
 
 [node name="Table" type="Node2D"]
 
@@ -18,60 +21,65 @@ size = Vector2(24, 6)
 rotation = 1.5708
 texture = ExtResource("1_so1t7")
 
-[node name="Bumpers" type="StaticBody2D" parent="."]
+[node name="Bumpers" type="StaticBody2D" parent="." groups=["table_wall"]]
+physics_material_override = SubResource("PhysicsMaterial_1euqw")
 script = ExtResource("2_1euqw")
 
 [node name="Wall2" type="CollisionShape2D" parent="Bumpers"]
-position = Vector2(-50, -36.5)
+position = Vector2(-76, -36.5)
 shape = SubResource("RectangleShape2D_vh2b3")
 
 [node name="Wall3" type="CollisionShape2D" parent="Bumpers"]
-position = Vector2(50, -36.5)
+position = Vector2(76, -36.5)
 shape = SubResource("RectangleShape2D_vh2b3")
 
 [node name="Wall4" type="CollisionShape2D" parent="Bumpers"]
-position = Vector2(50, 36.5)
+position = Vector2(76, 36.5)
 shape = SubResource("RectangleShape2D_vh2b3")
 
 [node name="Wall5" type="CollisionShape2D" parent="Bumpers"]
-position = Vector2(-50, 36.5)
+position = Vector2(-76, 36.5)
 shape = SubResource("RectangleShape2D_vh2b3")
 
 [node name="Wall6" type="CollisionShape2D" parent="Bumpers"]
-position = Vector2(0, 88)
+position = Vector2(0, 104.5)
 shape = SubResource("RectangleShape2D_so1t7")
 
 [node name="Wall7" type="CollisionShape2D" parent="Bumpers"]
-position = Vector2(0, -88)
+position = Vector2(0, -104.5)
 shape = SubResource("RectangleShape2D_so1t7")
 
-[node name="Holes" type="Area2D" parent="."]
+[node name="Holes" type="Area2D" parent="." groups=["table_hole"]]
 collision_priority = 2.0
+priority = 2
+script = ExtResource("3_1euqw")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Holes"]
 position = Vector2(-36, -71)
 scale = Vector2(0.46875, 0.46875)
-polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -166.4, 10.6667, -166.4, -138.667, 10.6667, -138.667)
 
 [node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Holes"]
-position = Vector2(36, -71)
-scale = Vector2(-0.469, 0.469)
-polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
-
-[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Holes"]
 position = Vector2(-36, 71)
 scale = Vector2(0.469, -0.469)
-polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -166.4, 10.6667, -166.4, -138.667, 10.6667, -138.667)
 
 [node name="CollisionShape2D4" type="CollisionPolygon2D" parent="Holes"]
 position = Vector2(36, 71)
 scale = Vector2(-0.469, -0.469)
-polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -55.4667, 10.6667, -55.4667, -68.2667, 10.6667, -68.2667)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -166.4, 10.6667, -166.4, -138.667, 10.6667, -138.667)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Holes"]
+position = Vector2(36, -71)
+scale = Vector2(-0.469, 0.469)
+polygon = PackedVector2Array(10.6667, -10.6667, -10, 10, -166.4, 10.6667, -166.4, -138.667, 10.6667, -138.667)
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Holes"]
-position = Vector2(-50, 0)
+position = Vector2(-76.5, 0)
 shape = SubResource("RectangleShape2D_1euqw")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Holes"]
-position = Vector2(50, 0)
+position = Vector2(77, 0)
 shape = SubResource("RectangleShape2D_1euqw")
+
+[connection signal="body_entered" from="Holes" to="Holes" method="_on_body_entered"]

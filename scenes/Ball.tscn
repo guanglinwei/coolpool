@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://s3ayjpiyroh2"]
+[gd_scene load_steps=5 format=3 uid="uid://s3ayjpiyroh2"]
 
-[ext_resource type="Texture2D" uid="uid://x2m7kifeiqgf" path="res://sprites/icon.svg" id="1_gk6bx"]
 [ext_resource type="Script" uid="uid://dmty8lfqvgjtv" path="res://scripts/ball.gd" id="1_lww6v"]
+[ext_resource type="Texture2D" uid="uid://sy3hx0icguq5" path="res://sprites/Ball.png" id="2_ja1hk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ja1hk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gk6bx"]
-radius = 9.05539
+radius = 3.16228
 
-[node name="Ball" type="RigidBody2D"]
+[node name="Ball" type="RigidBody2D" groups=["ball"]]
+physics_material_override = SubResource("PhysicsMaterial_ja1hk")
 script = ExtResource("1_lww6v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("1_gk6bx")
+texture = ExtResource("2_ja1hk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gk6bx")
