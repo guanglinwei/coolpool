@@ -74,7 +74,7 @@ func init_level(level: int):
 		acceptable_range = [0.8, 1.2];
 	
 	curr_cue_balls = max_cue_balls;
-	target_score = round(1 + 5 * ((level - 1) ** 1.5));
+	target_score = round(12 + 5 * ((level - 1) ** 1.5));
 	curr_base_score = 0;
 	curr_mult = 1;
 	current_score = 0;
