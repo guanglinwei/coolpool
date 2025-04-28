@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dhmeps37k3kt5"]
+[gd_scene load_steps=34 format=3 uid="uid://dhmeps37k3kt5"]
 
 [ext_resource type="PackedScene" uid="uid://cdv8k7w8m6gkq" path="res://scenes/Table.tscn" id="1_oasga"]
 [ext_resource type="PackedScene" uid="uid://s3ayjpiyroh2" path="res://scenes/Ball.tscn" id="2_yiydf"]
@@ -27,6 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://cdopphgestar5" path="res://scenes/PlusBumperSmall.tscn" id="23_ymf0f"]
 [ext_resource type="PackedScene" uid="uid://mb1yhtkyi3ni" path="res://scenes/NegativePizza.tscn" id="24_50826"]
 [ext_resource type="PackedScene" uid="uid://bg2but7uqcv7q" path="res://scenes/MultBumperSmall.tscn" id="25_c4kwd"]
+[ext_resource type="Texture2D" uid="uid://d04wpjmdh6tyd" path="res://sprites/lion2.jpg" id="28_5lvl5"]
+[ext_resource type="AudioStream" uid="uid://c387hgfijkq4g" path="res://sprites/lionsound.mp3" id="29_84825"]
 
 [sub_resource type="Gradient" id="Gradient_i6wy6"]
 offsets = PackedFloat32Array(0)
@@ -363,6 +365,17 @@ texture = ExtResource("22_c4kwd")
 [node name="Ball5" type="Sprite2D" parent="GameUI/Balls"]
 position = Vector2(71, 150)
 texture = ExtResource("22_c4kwd")
+
+[node name="Lionstuff" type="Node2D" parent="."]
+z_index = 2
+
+[node name="Lion2" type="Sprite2D" parent="Lionstuff"]
+position = Vector2(159, 90)
+scale = Vector2(0.784314, 0.352941)
+texture = ExtResource("28_5lvl5")
+
+[node name="lionsound" type="AudioStreamPlayer" parent="Lionstuff"]
+stream = ExtResource("29_84825")
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("5_a3rjs")

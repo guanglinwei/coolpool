@@ -38,6 +38,8 @@ var lives: int = 3:
 var max_cue_balls: int = 5;
 var curr_cue_balls: int = max_cue_balls;
 
+var ending_level: bool = false;
+
 const TABLE_MIN_X = 212;
 const TABLE_MAX_X = 288;
 const TABLE_MIN_Y = 17;
@@ -51,6 +53,8 @@ const INVALID_GEN_BOX_MAX_Y = 69;
 @export var hard_valid_bumpers: Array[PackedScene] = [];
 
 func _ready() -> void:
+	var lion_pic = $'../Lionstuff/Lion2' as Sprite2D;
+	lion_pic.hide()
 	for child in $'../Bumpers'.get_children():
 		var bumper = child as BaseBumper;
 		all_bumpers.append(bumper);
@@ -70,7 +74,7 @@ func init_level(level: int):
 		acceptable_range = [0.8, 1.2];
 	
 	curr_cue_balls = max_cue_balls;
-	target_score = round(12 + 5 * ((level - 1) ** 1.5));
+	target_score = round(1 + 5 * ((level - 1) ** 1.5));
 	curr_base_score = 0;
 	curr_mult = 1;
 	current_score = 0;
@@ -84,6 +88,7 @@ func init_level(level: int):
 		bumper.reset();
 
 func end_level():
+	ending_level = true;
 	# check if meet score range
 	if current_score < target_score * acceptable_range[0] or \
 		current_score > target_score * acceptable_range[1]:
@@ -93,9 +98,26 @@ func end_level():
 			else:
 				init_level(level);
 	else:
-		level += 1;
-		init_level(level);
+		lion_popup()
+
+func lion_popup() -> void:
+	var lion_stuff = $"../Lionstuff" 
+	var lion_pic = lion_stuff.get_child(0)
+	var lion_sound = lion_stuff.get_child(1)
 	
+	lion_sound.play()
+
+	lion_pic.show()
+	get_tree().create_timer(2).timeout.connect(func():
+		lion_pic.hide();
+		level += 1;
+		print(level)
+		init_level(level);
+		ending_level = false;
+	);
+
+
+
 func create_ball() -> Ball:
 	var ball = ball_scene.instantiate() as Ball;
 	balls_parent.add_child(ball);
@@ -150,7 +172,8 @@ func generate_level(level: int):
 
 # TODO: fix this functionality
 func out_of_balls():
-	end_level();
+	if not ending_level:
+		end_level();
 
 func lose_a_ball():
 	curr_cue_balls -= 1;
