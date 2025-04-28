@@ -99,7 +99,7 @@ func end_level():
 				init_level(level);
 	else:
 		lion_popup()
-
+ 
 func lion_popup() -> void:
 	var lion_stuff = $"../Lionstuff" 
 	var lion_pic = lion_stuff.get_child(0)
